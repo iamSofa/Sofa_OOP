@@ -1,1 +1,1 @@
-#  Sofiya  Kuskovva  12 group  DoEaW
+#  Sofiya  Kuskova  12 group  DoEWP
