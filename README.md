@@ -1,1 +1,3 @@
-#  Sofiya  Kuskova  12 group  DoEWP
+#  Sofiya  Kuskova Pavlovna
+* Group: 2-12-1
+* Specialty: DoEWP
