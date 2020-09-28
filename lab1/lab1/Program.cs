@@ -57,7 +57,7 @@ namespace lab1
             float longFloat = typeLong;
             decimal shortDecimal = typeShort;
             uint byteUint = typeByte;
-            Console.WriteLine("Явное приведение:");
+            Console.WriteLine("Неявное приведение:");
             Console.WriteLine(intChar);
 
             short sbyteShort = (short)typeSbyte;
@@ -65,7 +65,7 @@ namespace lab1
             ulong ushortUlong = (ulong)typeUshort;
             ushort byteUshort = (ushort)typeByte;
             double floatDouble = (double)typeFloat;
-            Console.WriteLine("Неявное приведение:");
+            Console.WriteLine("Явное приведение:");
             Console.WriteLine(byteUshort + "\n");
 
             // Выполните упаковку и распаковку значимых типов
