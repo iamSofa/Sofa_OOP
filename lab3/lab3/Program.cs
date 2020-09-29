@@ -1,4 +1,5 @@
 ﻿using lab3;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -14,10 +15,56 @@ namespace lab3
     {
         static void Main(string[] args)
         {
-            Book book = new Book("Вино из одуванчиков", new string[2]{ "Sofiya Kuskova", "Khudnitskiy Dmitriy"});
-            book.PageAmount = 120;
-            book.Cost = (long)(book.PageAmount * 1.43);
-            Console.WriteLine(book.ToString());
+            Book[] books = new Book[12];
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (i < 4)
+                {
+                    books[i] = new Book();
+                    if (i % 2 == 0)
+                    {
+                        books[i].Title = "Лолита";
+                        books[i].Authors = new string[] { "Набоков" };
+                        books[i].PublishingYear = 2016;
+                    }
+                }
+                else if (i < 8)
+                {
+                    books[i] = new Book("Мятная сказка", new string[] { "Полярный" }  );
+                    books[i].PublishingYear = 2002;
+                }
+                else
+                {
+                    books[i] = new Book("Вино из одуванчиков");
+                    books[i].PublishingYear = 1993;
+                }
+                Console.WriteLine($"{books[i]}\t{books[i].GetType()}");
+            }
+          
+            Console.WriteLine("Количество элементов: " + Book.GetObjectAmount());
+            Console.WriteLine("Сравнение одинаковых объектов: " + books[2].Equals(books[0]));
+            Console.WriteLine("Сравнение разных объектов: " + books[5].Equals(books[9]));
+
+            Console.Write("Введите автора: ");
+            string author = Console.ReadLine();
+            foreach (var book in books)
+            {
+                bool result;
+                book.AmIAuthor(author, out result);
+                if (result)
+                    Console.WriteLine(book);
+            }
+            Console.Write("Введите год: ");
+            int year = Convert.ToInt32(Console.ReadLine());
+            foreach (var book in books)
+            {
+                if (book.PublishingYear < year)
+                    Console.WriteLine(book);
+            }
+
+            var anon = new { Title = "Book", Cost = 200 };
+            Console.WriteLine(anon.GetType());
+            Console.WriteLine(anon);
             Console.ReadKey();
         }
     }
@@ -35,6 +82,8 @@ namespace lab3
         private long cost;
         private string bindingType;
 
+        public static string[] availableBindingTypes;
+
         // Свойства класса 
         public long ID
         {
@@ -48,7 +97,7 @@ namespace lab3
 
         public string[] Authors
         {
-            get { return authors; }
+            get { return authors ?? new string[] { "None" }; }
             set { authors = value; }
         }
 
@@ -60,7 +109,7 @@ namespace lab3
         public short PublishingYear
         {
             get { return publishingYear; }
-            private set
+            set
             {
                 if (value < 1564 || value > DateTime.Now.Year) return;
                 else publishingYear = value;
@@ -72,7 +121,7 @@ namespace lab3
             get { return pageAmount; }
             set
             {
-                if (value < 0) return;
+                if (value < 1) return;
                 else pageAmount = value;
             }
         }
@@ -80,9 +129,9 @@ namespace lab3
         public long Cost
         {
             get { return cost; }
-            set
+            private set
             {
-                if (value < 0) return;
+                if (value < 0 || value > 2*10e2) return;
                 else cost = value;
             }
         }
@@ -91,10 +140,14 @@ namespace lab3
         {
             get
             {
-                if (bindingType.Length == 0) return "Без переплёта";
+                if (bindingType?.Length == 0) return "Без переплёта";
                 else return bindingType;
             }
-            set { bindingType = value; }
+            set
+            {
+                if (availableBindingTypes.Contains(value))
+                    bindingType = value;
+            }
         }
         
         // Методы класса
@@ -102,36 +155,50 @@ namespace lab3
         {
             return objectAmount;
         }
+        
+        public static string GetInformationAbout()
+        {
+            return "This is class Book";
+        }
+        public void AmIAuthor(string author, out bool result)
+        {
+            result = authors.Contains(author);
+        }
+
+        public void CalculateCost(ref int otherCost)
+        {
+            otherCost = (int)(PageAmount * Cost * 1.3);
+        }
 
         // Конструкторы класса
-        Book()
+        private Book(int hash)
         {
+            id = hash.GetHashCode();
             objectAmount++;
-            id = DateTime.Now.GetHashCode();
-            title = "Unnamed";
-            bindingType = "Без переплёта";
+            authors = new string[] { "Linda Mark" };
         }
-        static Book()
+        public Book() : this(DateTime.Now.Millisecond)
         {
-
+            Title = "Unnamed book";
+            Authors = new string[]{ "Alexandr Polyrny" };
+            PublishingYear = (short)DateTime.Now.Year;
+            PageAmount = 125;
+            Cost = (long)(PageAmount * 1.25);
         }
-
-        public Book(string title, string[] authors)
+        public Book(string title, string[] authors) : this(DateTime.Now.Millisecond)
         {
             Title = title;
             Authors = authors;
         }
-
-        public Book(string publishingHouse, short publishingYear = 2020, string bindingType = "С переплётом")
+        public Book(string title, int pageAmount = 240, long cost = 40) : this(DateTime.Now.Millisecond)
         {
-
+            Title = title;
+            BindingType = "Without";
         }
-
-        public Book(int pageAmount, ref long cost)
+        static Book()
         {
-            cost = (long)(pageAmount * 1.3);
+            availableBindingTypes = new string[]{ "Бумага", "Картон" };
         }
-
         public override bool Equals(object obj)
         {
             return (this.Title == ((Book)obj).Title);
@@ -139,7 +206,7 @@ namespace lab3
 
         public override string ToString()
         {
-            return $"{Title} [{PageAmount}] {Cost}";
+            return $"{Title}\t{Authors[0]}\t{PublishingHouse}\t{PublishingYear}\t{PageAmount}\t{Cost}\t{BindingType}";
         }
 
         public override int GetHashCode()
