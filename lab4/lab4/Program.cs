@@ -16,16 +16,19 @@ namespace lab4
             rand = new Random(DateTime.Now.Millisecond);
 
             List list = new List(5);
+            List newList = new List(7);
             Console.WriteLine(list);
+            Console.WriteLine(newList);
+            Console.WriteLine();
             Console.WriteLine(list >> 2);
             Console.WriteLine(list);
             Console.WriteLine(list + 3);
             Console.WriteLine(list);
-            Console.WriteLine(list != list);
-            Console.WriteLine(list == list);
+            Console.WriteLine(list != newList);
+            Console.WriteLine(list == newList);
 
             string words = Console.ReadLine();
-            Console.WriteLine("Longest word - " + words.GetLongestWord());
+            Console.WriteLine("Longest word: " + words.GetLongestWord());
             Console.WriteLine(list.DeleteLastElement());
             list.MaxMinDif();
             Console.ReadKey();
@@ -59,9 +62,14 @@ namespace lab4
         public static string GetLongestWord(this string source)
         {
             string[] words = source.Split(' ');
-            return words.Max();
+            string mxWord = String.Empty;
+            foreach (var word in words)
+            {
+                if (word.Length > mxWord.Length)
+                    mxWord = word;
+            }
+            return mxWord;
         }
-
         public static List DeleteLastElement(this List source)
         {
             return source >>= source.Length;

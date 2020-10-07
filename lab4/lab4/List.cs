@@ -36,7 +36,7 @@ namespace lab4
         }
         private List()
         {
-            owner = new Owner("Sofiya", "KHCorp");
+            owner = new Owner("Sofa", "Corporation");
             date = new DateTime();
         }
 
@@ -44,8 +44,6 @@ namespace lab4
         {
             this.elements = elements;
             Length = elements.Length;
-
-            string str = String.Empty;
         }
         public List(int size) : this()
         {
@@ -53,7 +51,7 @@ namespace lab4
             Length = size;
             for (int i = 0; i < Length; i++)
             {
-                elements[i] = Program.rand.Next(-10, 10);
+                elements[i] = Program.rand.Next(10, 99);
             }
         }
 
