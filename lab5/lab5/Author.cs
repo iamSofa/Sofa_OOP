@@ -10,7 +10,13 @@ namespace lab5
     {
         public Author()
         {
-            Name = new string[] { "Alexandr Polyrny" };
+            Name = "Unnamed";
+            Gender = "Female";
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}\t{Gender}";
         }
     }
 }

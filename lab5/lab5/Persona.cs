@@ -8,12 +8,12 @@ namespace lab5
 {
     public class Persona
     {
-        private string gender;
-        private string[] name;
+        public string gender;
+        public string name;
 
-        public string[] Name
+        public string Name
         {
-            get { return name ?? new string[] { "None" }; }
+            get { return name; }
             set { name = value; }
         }
         public string Gender

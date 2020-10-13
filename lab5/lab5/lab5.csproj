@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="Interface1.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="PrintedEdition.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishingHouse.cs" />
