@@ -8,10 +8,16 @@ namespace lab5
 {
     public abstract class PrintedEdition
     {
-        private string title;
-        private short publishingYear;
-        private int pageAmount;
+        public string title;
+        public short publishingYear;
+        public int pageAmount;
         Author author = new Author();
+        public int cost;
+
+        protected PrintedEdition()
+        {
+            cost = new Random().Next();
+        }
 
         public string AuthorName
         {

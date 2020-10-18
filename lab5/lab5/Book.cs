@@ -7,18 +7,23 @@ using System.Threading.Tasks;
 
 namespace lab5
 {
-    public class Book : PrintedEdition, Interface1
+    public partial class Book : PrintedEdition, Interface1
     {
-        public Book() 
+        
+        public BookType type;
+        public Description descriptionBook;
+        public Book() : base()
         {
             Title = "Unnamed book";
             PublishingYear = (short)DateTime.Now.Year;
             PageAmount = 125;
+            descriptionBook = new Description("Horror", "Blood Moon", "So scary..");
+            type = BookType.Type1;
         }
 
         public override string ToString()
         {
-            return $"{Title}\t{PublishingYear}\t{PageAmount}\t{AuthorName}";
+            return $"{Title}\t{PublishingYear}\t{PageAmount}\t{AuthorName}\t{descriptionBook.genre}\t{descriptionBook.theme}\t{descriptionBook.description}\t{type}";
         }
         public override bool Equals(object obj)
         {

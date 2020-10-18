@@ -57,6 +57,27 @@ namespace lab5
                 Console.WriteLine(printer.IAmPrinting(objArr[i]));
                 Console.WriteLine();
             }
+            Console.WriteLine("Lab6");
+
+            Library bookFromLibrary = new Library(objArr);
+            bookFromLibrary.PrintEditions();
+            Console.WriteLine();
+            bookFromLibrary.DeleteEdition(1);
+            bookFromLibrary.PrintEditions();
+            Console.WriteLine();
+            bookFromLibrary.AddEdition(textbook);
+            bookFromLibrary.PrintEditions();
+
+            Library.LibraryController library1 = new Library.LibraryController(bookFromLibrary);
+            Console.WriteLine();
+            Console.Write("Количество учебников:");
+            Console.WriteLine(library1.AmountTextbooks());
+            Console.WriteLine();
+            Console.Write("Список печатных изданий старше 1999 года:");
+            library1.OutputByYear(1999);
+            Console.WriteLine();
+            Console.Write("Общая цена всех печатных изданий: ");
+            Console.WriteLine(library1.TotalCost() + " " + "рублей");
 
             Console.ReadKey();
         }

@@ -8,23 +8,40 @@ namespace lab5
 {
     class Journal : PrintedEdition
     {
-        public Journal()
+        public enum JournalType
+        {
+            Type1 = 0,
+            Type2, Type3
+        }
+        public struct Description
+        {
+            public string genre;
+            public string theme;
+            public string description;
+            public Description(string genre, string theme, string description)
+            {
+                this.genre = genre;
+                this.theme = theme;
+                this.description = description;
+            }
+        }
+        public JournalType type;
+        public Description descriptionJournal;
+        public Journal() : base()
         {
             Title = "Unnamed book";
             PublishingYear = 1999;
             PageAmount = 30;
+            descriptionJournal = new Description("Child", "Flowers", "Good");
+            type = JournalType.Type3;
         }
         public override string ToString()
         {
-            return $"{Title}\t{PublishingYear}\t{PageAmount}\t{AuthorName}";
+            return $"{Title}\t{PublishingYear}\t{PageAmount}\t{AuthorName}\t{descriptionJournal.genre}\t{descriptionJournal.theme}\t{descriptionJournal.description}\t{type}";
         }
         public override void ReadBook()
         {
             Console.WriteLine("Вы читаете книги в абстрактном классе");
-        }
-        public void Last()
-        {
-            Console.WriteLine("Ты закончил читать книги!");
         }
     }
 }
