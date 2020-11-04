@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace lab5
     {
         static void Main(string[] args)
         {
+            //lab5
             Book book = new Book();
             book.First();
             book.Title = "Лолита";
@@ -57,6 +59,8 @@ namespace lab5
                 Console.WriteLine(printer.IAmPrinting(objArr[i]));
                 Console.WriteLine();
             }
+            
+            //lab6
             Console.WriteLine("Lab6");
 
             Library bookFromLibrary = new Library(objArr);
@@ -78,6 +82,73 @@ namespace lab5
             Console.WriteLine();
             Console.Write("Общая цена всех печатных изданий: ");
             Console.WriteLine(library1.TotalCost() + " " + "рублей");
+
+            //lab7 
+
+            Console.WriteLine("\nLab7");
+
+            Textbook textbook1 = new Textbook();
+            try
+            {
+                textbook1.PublishingYear = -55;
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message); 
+            }
+            finally
+            {
+                Console.WriteLine("Введите новое число");
+                textbook1.PublishingYear = (short)Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine();
+            try
+            {
+                Journal journal1 = new Journal(-2);
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+
+            Book book1 = new Book();
+            try
+            {
+                book1.Type = (Book.BookType)125;
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Получена ошибка!");
+            }
+
+            Book edition = null;
+            try
+            {
+                edition.cost = 200;
+            }
+            catch (NullReferenceException exception)
+            {
+                Console.WriteLine(exception.StackTrace);
+                Console.WriteLine();
+                Console.WriteLine(exception.TargetSite);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\tОшибка!\t" + ex.Message);
+            }
+
+            try
+            {
+                book1.cost /= 0;
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("Деление на ноль!\t" + ex.Source);
+            }
+
+            int[] a = null;
+            Debug.Assert(a != null, "Ссылка на нуль!");
 
             Console.ReadKey();
         }

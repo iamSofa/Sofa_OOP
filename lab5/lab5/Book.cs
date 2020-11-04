@@ -10,15 +10,32 @@ namespace lab5
     public partial class Book : PrintedEdition, Interface1
     {
         
-        public BookType type;
+        private BookType type;
         public Description descriptionBook;
+
+        public BookType Type
+        {
+            get { return type; }
+            set
+            {
+                BookType[] types = { BookType.Type1, BookType.Type2, BookType.Type3 };
+                if (!types.Contains(value))
+                {
+                    throw new TypeValue("Неопознанный тип", (int)value);
+                }
+                else
+                {
+                    type = value;
+                }
+            }
+        }
         public Book() : base()
         {
             Title = "Unnamed book";
             PublishingYear = (short)DateTime.Now.Year;
             PageAmount = 125;
             descriptionBook = new Description("Horror", "Blood Moon", "So scary..");
-            type = BookType.Type1;
+            Type = BookType.Type1;
         }
 
         public override string ToString()

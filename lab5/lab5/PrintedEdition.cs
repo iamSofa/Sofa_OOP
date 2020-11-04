@@ -43,7 +43,8 @@ namespace lab5
             get { return publishingYear; }
             set
             {
-                if (value < 1564 || value > DateTime.Now.Year) return;
+                if (value < 0) 
+                    throw new Negative("Год не может быть отрицательным",value);
                 else publishingYear = value;
             }
         }

@@ -35,6 +35,18 @@ namespace lab5
             descriptionJournal = new Description("Child", "Flowers", "Good");
             type = JournalType.Type3;
         }
+        public Journal(int value) : this()
+        {
+            if (value >= 0)
+            {
+                PageAmount = value;
+            }
+            else
+            {
+                Created created = new Created("Объект не может быть создан");
+                throw created;
+            }
+        }
         public override string ToString()
         {
             return $"{Title}\t{PublishingYear}\t{PageAmount}\t{AuthorName}\t{descriptionJournal.genre}\t{descriptionJournal.theme}\t{descriptionJournal.description}\t{type}";
