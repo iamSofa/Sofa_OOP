@@ -61,13 +61,19 @@ namespace Lab_9
             g.DoHeal(enemy);
 
             Func<string, string> strOp = (s) => s.ToUpper();
-            string str = strOp("S,,,,,,,ofiya,   ,,,,,,,,     I  ,,,,,,,       lo......ve   ,,,,,,   you!, ,,,,     ,");
+            string str = strOp("My:     name., is?   Sofa!");
             strOp = RemovePunctuationsMarks;
             str = strOp(str);
             strOp = RemoveUselessSpaces;
             str = strOp(str);
             Console.WriteLine(str);
 
+            string str2 = strOp("My nome is Sofo!");
+            strOp = AddPoint;
+            str2 = strOp(str2);
+            strOp = ReplaceO;
+            str2 = strOp(str2);
+            Console.WriteLine(str2);
 
             Console.ReadKey();
         }
@@ -103,6 +109,19 @@ namespace Lab_9
                 }
                 else i++;
             }
+            return str;
+        }
+        public static string AddPoint(string str)
+        {
+            if (str[str.Length - 1] == '!' || str[str.Length - 1] == '?')
+            {
+                str = str.Replace(str[str.Length - 1], '.'); 
+            }
+            return str;
+        }
+        public static string ReplaceO(string str)
+        {
+            str = str.Replace('o', 'a');
             return str;
         }
     }
