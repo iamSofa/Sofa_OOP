@@ -17,38 +17,38 @@ namespace Lab_9
 
             Entity hero = new Entity()
             {
-                heatlh = rand.Next(60, 110),
+                health = rand.Next(60, 110),
                 wisdom = rand.Next(10, 30),
                 strength = rand.Next(80, 120),
                 doAttack = (obj) =>
                 {
                     var strength = rand.Next(-obj.strength, obj.strength);
-                    obj.heatlh -= strength;
+                    obj.health -= strength;
                     BeautifulOutput(ConsoleColor.Green, $" - [Герой] Наносит урон врагу! {strength} [{obj}]");
                 },
                 doHeal = (obj) =>
                 {
                     var heal = rand.Next(obj.wisdom);
-                    obj.heatlh += heal;
+                    obj.health += heal;
                     BeautifulOutput(ConsoleColor.Green, $" + [Герой] Лечит союзника! {heal}  [{obj}]");
                 }
             };
 
             Entity enemy = new Entity()
             {
-                heatlh = rand.Next(10, 30),
+                health = rand.Next(10, 30),
                 wisdom = rand.Next(90, 130),
                 strength = rand.Next(10),
                 doAttack = (obj) =>
                 {
                     var strength = rand.Next(-obj.strength, obj.strength);
-                    obj.heatlh -= strength;
+                    obj.health -= strength;
                     BeautifulOutput(ConsoleColor.Red, $" - [Враг] Наносит урон! {strength}  [{obj}]");
                 },
                 doHeal = (obj) =>
                 {
                     var heal = rand.Next(obj.wisdom);
-                    obj.heatlh += heal;
+                    obj.health += heal;
                     BeautifulOutput(ConsoleColor.Red, $" + [Враг] Лечит себя! {heal}  [{obj}]");
                 }
             };
@@ -60,17 +60,23 @@ namespace Lab_9
             g.heal += hero.doHeal;
             g.DoHeal(enemy);
 
+
+
             Func<string, string> strOp = (s) => s.ToUpper();
             string str = strOp("My:     name., is?   Sofa!");
+            Console.WriteLine(str);
             strOp = RemovePunctuationsMarks;
             str = strOp(str);
+            Console.WriteLine(str);
             strOp = RemoveUselessSpaces;
             str = strOp(str);
             Console.WriteLine(str);
 
             string str2 = strOp("My nome is Sofo!");
+            Console.WriteLine(str2);
             strOp = AddPoint;
             str2 = strOp(str2);
+            Console.WriteLine(str2);
             strOp = ReplaceO;
             str2 = strOp(str2);
             Console.WriteLine(str2);

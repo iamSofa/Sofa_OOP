@@ -20,7 +20,7 @@ namespace Lab_9
 
     public class Entity
     {
-        public int heatlh;
+        public int health;
         public int wisdom;
         public int strength;
 
@@ -29,7 +29,7 @@ namespace Lab_9
         
         public override string ToString()
         {
-            return $"{heatlh} | {wisdom} | {strength}";
+            return $"{health} | {wisdom} | {strength}";
         }
     }
 }
