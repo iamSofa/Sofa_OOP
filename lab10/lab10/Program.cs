@@ -31,7 +31,7 @@ namespace lab10
             {
                 Console.Write(i + "   ");
             }
-            Console.WriteLine("\nКоличество элементов: " + arrList.Count);
+            Console.WriteLine("\nКоличество элементов : " + arrList.Count);
             Console.Write("Введите элемент, который надо найти: ");
             if (arrList.Contains(Console.ReadLine()))
             {
