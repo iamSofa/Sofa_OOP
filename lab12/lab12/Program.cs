@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace lab12
     {
         static void Main(string[] args)
         {
+            Reflector.WriteFile("lab12.Matrix");
             Reflector.GetMethods("lab12.Matrix");
             Console.WriteLine("\n");
             Reflector.GetFieldsProperties("lab12.Matrix");
@@ -17,6 +19,14 @@ namespace lab12
             Reflector.GetInterface("lab12.Matrix");
             Console.WriteLine("\n");
             Reflector.GetMethodsParameterType("lab12.Matrix", "Int32");
+
+            Reflector.GetMethods("lab12.Book");
+            Console.WriteLine("\n");
+            Reflector.GetFieldsProperties("lab12.Book");
+            Console.WriteLine("\n");
+            Reflector.GetInterface("lab12.Book");
+            Console.WriteLine("\n");
+            Reflector.GetMethodsParameterType("lab12.Book", "Int32");
             Console.ReadKey();
         }
     }
