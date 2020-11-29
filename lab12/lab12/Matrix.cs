@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace lab12
 {
-    class Matrix
+    class Matrix : InterfaceRandom
     {
         public int length;
         public int width;
+        public int Length { get; set; }
+        public int Width { get; set; }
         public int[,] matrix;
         public Matrix(int a, int b)
         {

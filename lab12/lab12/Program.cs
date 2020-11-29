@@ -11,6 +11,12 @@ namespace lab12
         static void Main(string[] args)
         {
             Reflector.GetMethods("lab12.Matrix");
+            Console.WriteLine("\n");
+            Reflector.GetFieldsProperties("lab12.Matrix");
+            Console.WriteLine("\n");
+            Reflector.GetInterface("lab12.Matrix");
+            Console.WriteLine("\n");
+            Reflector.GetMethodsParameterType("lab12.Matrix", "Int32");
             Console.ReadKey();
         }
     }
