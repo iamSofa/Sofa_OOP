@@ -72,14 +72,28 @@ namespace lab11
                           select n;
             rez.First().Output();
 
-            Console.WriteLine("\nCписок матриц с равным количеством заданного символа в каждой строке: ");
+            Console.WriteLine("\nCписок матриц с равным количеством заданного символа: ");
+            int ch = Convert.ToInt32(Console.ReadLine());
+            var res = from n in matrixList
+                      group n by n.NumberOfUnits(ch);
+            foreach (var kv in res)
+            {
+                Console.WriteLine("Кол-во символов: " + kv.Key);
+                foreach (var m in kv)
+                {
+                    m.Output();
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            }
+
             //?
 
             Console.WriteLine("\nМаксимальная матрица: ");
             var rez2 = from n in matrixList
                       orderby n.NumberOfUnits(1)
                       select n;
-            rez2.Last().Output();
+            rez2.LastOrDefault()?.Output();
 
             Console.WriteLine("\nКоличество матриц заданного размера: ");
             int len = Convert.ToInt32(Console.ReadLine());
@@ -87,7 +101,7 @@ namespace lab11
             var rez3 = from n in matrixList
                        where ((n.length == len)&&(n.width == width))
                        select n;
-            rez3.First().Output();
+            rez3.FirstOrDefault()?.Output();
 
             Console.WriteLine("\nУпорядоченный список матриц по количеству единиц: ");
             var rez4 = from n in matrixList

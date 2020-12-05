@@ -4,12 +4,14 @@ using System.Reflection;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace lab12
 {
     public static class Reflector
     {
+        private static Regex regObjName = new Regex(@"^[a-z]\S+[.][a-z]\S+", RegexOptions.IgnoreCase);
         public static void GetMethods(string objName)
         {
             Type myType = Type.GetType(objName);
@@ -121,11 +123,27 @@ namespace lab12
                 }
             }
         }
-        public static void ReadFile(string objName, string method)
+        private static string ReadFromFile(string fileName)
+        {
+            FileStream fin = new FileStream(fileName, FileMode.Open);
+            byte[] data = new byte[fin.Length];
+            fin.Read(data, 0, data.Length);
+            fin.Close();
+            return Encoding.Default.GetString(data);
+        }
+        public static void InvokeMethods(string objName)
         {
             Type myType = Type.GetType(objName);
-            MethodInfo methodInfo = myType.GetMethod(method);
-
+            var obj = Activator.CreateInstance(myType);
+            foreach (var args in from l in ReadFromFile(objName + ".txt").Split('\n')
+                                 select Regex.Split(l, @"\s*=\s*").Where(x => x != string.Empty).Select(x => Regex.Replace(x, @"[()\r]", "")))
+            {
+                MethodInfo method = myType.GetMethod(args.LastOrDefault());
+                object[] prms = (from p in args.FirstOrDefault().Split(',').Where(x => !x.Equals(string.Empty))
+                                 from pT in method.GetParameters().Select(x => x.ParameterType)
+                                 select Convert.ChangeType(p, pT)).ToArray();
+                Console.WriteLine($"{args.LastOrDefault()}() - {method.Invoke(obj, prms) ?? "void"}");
+            }
         }
 
     }

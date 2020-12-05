@@ -10,17 +10,18 @@ namespace lab11
     {
         public int length;
         public int width;
-        public int[,] matrix;
+        public int[][] matrix;
         public Matrix(int a, int b)
         {
-            matrix = new int[a,b];
+            matrix = new int[a][];
+            for (int i = 0; i < matrix.GetLength(0); i++) matrix[i] = new int[b];
             length = a;
             width = b;
             for (int i = 0; i < length; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    matrix[i, j] = 0;
+                    matrix[i][j] = 0;
                 }
             }
         }
@@ -31,7 +32,7 @@ namespace lab11
             {
                 for (int j = 0; j < width; j++)
                 {
-                    matrix[i,j] = rnd.Next(0, 2);
+                    matrix[i][j] = rnd.Next(0, 2);
                 }
             }
         }
@@ -41,7 +42,7 @@ namespace lab11
             {
                 for (int j = 0; j < width; j++)
                 {
-                    Console.Write(matrix[i, j] + " ");
+                    Console.Write(matrix[i][j] + " ");
                 }
                 Console.WriteLine();
             }
@@ -53,7 +54,7 @@ namespace lab11
             {
                 for (int j = 0; j < width; j++)
                 {
-                   if (matrix[i, j] == a)
+                   if (matrix[i][j] == a)
                    {
                         num++;
                    }
@@ -68,7 +69,7 @@ namespace lab11
             {
                 for (int j = 0; j < width; j++)
                 {
-                        num += matrix[i, j];
+                        num += matrix[i][j];
                 }
             }
             return num;

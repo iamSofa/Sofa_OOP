@@ -92,7 +92,10 @@ namespace lab12
         {
             return objectAmount;
         }
-        
+        public void GetBook(string str)
+        {
+            Console.WriteLine("Book: " + str);
+        }
         public static string GetInformationAbout()
         {
             return "This is class Book";

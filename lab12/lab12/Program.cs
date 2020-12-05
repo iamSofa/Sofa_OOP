@@ -27,6 +27,9 @@ namespace lab12
             Reflector.GetInterface("lab12.Book");
             Console.WriteLine("\n");
             Reflector.GetMethodsParameterType("lab12.Book", "Int32");
+
+            Console.WriteLine("\n");
+            Reflector.InvokeMethods("lab12.Book");
             Console.ReadKey();
         }
     }
